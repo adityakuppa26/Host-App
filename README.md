@@ -12,7 +12,7 @@ Music and sound effects are generated in the browser, so there are no audio file
 ## Run
 
 ```bash
-python app.py
+python3 app.py
 ```
 
 Open `http://127.0.0.1:8000`.
@@ -26,3 +26,13 @@ python app.py --host 0.0.0.0 --port 8000
 Then open `http://YOUR-LAPTOP-IP:8000` from the other device.
 
 For public internet access, use a tunnel such as Cloudflare Tunnel, Tailscale Funnel, or ngrok, or configure router port forwarding carefully.
+
+## Render
+
+When deploying this repository as a Render Web Service:
+
+- Environment: Python
+- Build command: leave blank
+- Start command: `python app.py`
+
+The app reads Render's `PORT` environment variable and binds to `0.0.0.0` automatically.
