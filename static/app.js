@@ -288,33 +288,6 @@ function applyProgressionDateRules(progress) {
   return progress;
 }
 
-function mergeProgression(localProgress, remoteProgress) {
-  const local = normalizeProgression(localProgress);
-  const remote = normalizeProgression(remoteProgress);
-  const merged = { ...remote };
-
-  if (local.bestPercent > remote.bestPercent) {
-    merged.bestPercent = local.bestPercent;
-    merged.bestPoints = local.bestPoints;
-  } else if (local.bestPercent === remote.bestPercent) {
-    merged.bestPoints = Math.max(local.bestPoints, remote.bestPoints);
-  }
-  merged.bestStreak = Math.max(local.bestStreak, remote.bestStreak);
-  merged.clearedBosses = [...new Set([...remote.clearedBosses, ...local.clearedBosses])].sort();
-  merged.seenQuestions = [...new Set([...remote.seenQuestions, ...local.seenQuestions])];
-
-  if (local.dailyDate > remote.dailyDate) {
-    merged.dailyDate = local.dailyDate;
-    merged.dailyStreak = local.dailyStreak;
-    merged.dailyRuns = local.dailyRuns;
-  } else if (local.dailyDate === remote.dailyDate) {
-    merged.dailyStreak = Math.max(local.dailyStreak, remote.dailyStreak);
-    merged.dailyRuns = Math.max(local.dailyRuns, remote.dailyRuns);
-  }
-
-  return applyProgressionDateRules(merged);
-}
-
 function loadLocalProgression() {
   try {
     return normalizeProgression(JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"));
@@ -334,11 +307,10 @@ async function loadRemoteProgression() {
 }
 
 async function loadProgression() {
-  const localProgress = loadLocalProgression();
   const remoteProgress = await loadRemoteProgression();
   state.progression = remoteProgress
-    ? mergeProgression(localProgress, remoteProgress)
-    : applyProgressionDateRules(localProgress);
+    ? applyProgressionDateRules(remoteProgress)
+    : applyProgressionDateRules(loadLocalProgression());
   saveProgression();
 }
 
