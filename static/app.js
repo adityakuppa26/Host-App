@@ -5,11 +5,11 @@ const MODES = {
   ton: {
     title: "Kruts' Ton Review",
     eyebrow: "CFA Level 2 · Queen Charlotte is watching",
-    subhead: "Kruts wins approval by surviving CFA traps with poise, speed, and just enough scandal.",
-    setupCopy: "Pick a deck. Lady Whistledown will publish every miss in Kruts' review sheet.",
-    preview: "Approval meter, gossip-sheet review, and society-level pressure.",
+    subhead: "Kruts builds exam poise by spotting CFA traps early and turning them into clean reps.",
+    setupCopy: "Pick a deck. Lady Whistledown will turn every review target into a polished next move.",
+    preview: "Approval meter, courtly review notes, and society-level momentum.",
     emptyTitle: "Kruts, the social season begins.",
-    emptyCopy: "A polished answer earns approval. A shaky one becomes tomorrow's review target.",
+    emptyCopy: "A polished answer earns approval. Every stumble becomes a useful review target.",
     scene: "assets/regency-scene.svg",
     sticker: "assets/regency-sticker.svg",
     character: "Lady Whistledown",
@@ -22,20 +22,20 @@ const MODES = {
       "The ballroom survives another turn."
     ],
     wrong: [
-      "Lady Whistledown has ink on the page.",
-      "Lady Danbury raises one eyebrow.",
-      "The ton has noticed the lapse."
+      "Lady Whistledown saves the learning note.",
+      "Lady Danbury points to the next rep.",
+      "The ton has found a useful review target."
     ],
-    clean: "No scandal to report. This deck exits the ballroom untouched.",
+    clean: "Clean run. This deck exits the ballroom with momentum.",
   },
   boss: {
     title: "Kruts' Boss Rush",
     eyebrow: "CFA Level 2 · Topic bosses unlocked",
-    subhead: "Kruts crushes valuation beasts, accounting phantoms, and derivative traps before the timer wins.",
-    setupCopy: "Every correct answer damages the boss. Misses let it recover.",
-    preview: "HP bar, arena pressure, and topic bosses that punish weak concepts.",
+    subhead: "Kruts clears valuation beasts, accounting phantoms, and derivative traps one rep at a time.",
+    setupCopy: "Every answer moves the HP bar and reveals the next concept to master.",
+    preview: "HP bar, arena pressure, and topic bosses that expose high-value review targets.",
     emptyTitle: "Kruts, the arena is open.",
-    emptyCopy: "Pick a boss, enter the pit, and turn weak concepts into defeated HP bars.",
+    emptyCopy: "Pick a boss, enter the arena, and turn review targets into cleared HP bars.",
     scene: "assets/boss-scene.svg",
     sticker: "assets/boss-sticker.svg",
     character: "The Curriculum Boss",
@@ -48,19 +48,19 @@ const MODES = {
       "The boss staggers."
     ],
     wrong: [
-      "The boss counters.",
-      "That trap had armor.",
-      "The arena punishes hesitation."
+      "The boss reveals a route.",
+      "That concept is now mapped.",
+      "The arena logs the next upgrade."
     ],
-    clean: "Flawless run. The boss never landed a hit.",
+    clean: "Flawless run. The boss is cleared and the timing stays warm.",
   },
   lightning: {
     title: "Kruts Lightning",
     eyebrow: "CFA Level 2 · Speed drill",
-    subhead: "Fast answers, streak pressure, instant corrections, no ceremonial nonsense.",
+    subhead: "Fast answers, streak pressure, instant coaching, and steady exam momentum.",
     setupCopy: "Short timer. Streaks matter. Explanations stay sharp.",
-    preview: "Fast timer, streak meter, and no room for sleepy guesses.",
-    emptyTitle: "Kruts, the clock is already rude.",
+    preview: "Fast timer, streak meter, and quick correction loops.",
+    emptyTitle: "Kruts, the clock is ready.",
     emptyCopy: "Pick a deck and move fast. Recognition speed is the whole point.",
     scene: "assets/lightning-scene.svg",
     sticker: "assets/lightning-sticker.svg",
@@ -74,11 +74,11 @@ const MODES = {
       "Streak holds."
     ],
     wrong: [
-      "Streak reset.",
-      "Too fast for that trap.",
-      "Correction logged."
+      "Streak reloads.",
+      "Trap spotted for the next rep.",
+      "Correction locked in."
     ],
-    clean: "No misses. The streak engine is warm.",
+    clean: "Clean speed run. The streak engine is warm.",
   },
 };
 
@@ -109,29 +109,29 @@ const DEFAULT_PROGRESS = {
 };
 
 const STREAK_TITLES = [
-  { min: 8, label: "Exam Demon" },
+  { min: 8, label: "Exam Ready" },
   { min: 5, label: "Analyst Mode" },
   { min: 3, label: "Kruts Mode" },
   { min: 2, label: "Locked In" },
 ];
 
 const MODE_RULES = {
-  ton: "Confidence wagers: Double earns big approval, but a miss becomes scandal.",
-  boss: "Topic bosses counter wrong answers with time and point attacks.",
-  lightning: "Fast answers keep the combo alive; slow correct answers break momentum.",
+  ton: "Confidence wagers: Double earns big approval; review targets become the next polished rep.",
+  boss: "Topic bosses turn review targets into visible upgrade paths.",
+  lightning: "Fast answers keep the combo alive; slower answers still save the correction.",
 };
 
 const BOSS_TRAITS = {
-  "Alternatives": { attack: "Illiquidity crush", timePenalty: 8, pointPenalty: 35 },
-  "Corporate Issuers": { attack: "Capital drain", timePenalty: 8, pointPenalty: 40 },
-  "Derivatives": { attack: "Gamma snap", timePenalty: 14, pointPenalty: 25 },
-  "Economics": { attack: "Currency shock", timePenalty: 16, pointPenalty: 20 },
-  "Equity": { attack: "Valuation trap", timePenalty: 10, pointPenalty: 35 },
-  "Ethics": { attack: "Standards violation", timePenalty: 10, pointPenalty: 45 },
-  "Fixed Income": { attack: "Duration hit", timePenalty: 14, pointPenalty: 25 },
-  "FRA": { attack: "Accounting fog", timePenalty: 12, pointPenalty: 30 },
-  "Portfolio": { attack: "Tracking-error spike", timePenalty: 10, pointPenalty: 35 },
-  "Quant": { attack: "Regression noise", timePenalty: 12, pointPenalty: 30 },
+  "Alternatives": { attack: "Illiquidity drill", timePenalty: 8, pointPenalty: 35 },
+  "Corporate Issuers": { attack: "Capital structure drill", timePenalty: 8, pointPenalty: 40 },
+  "Derivatives": { attack: "Gamma drill", timePenalty: 14, pointPenalty: 25 },
+  "Economics": { attack: "Currency drill", timePenalty: 16, pointPenalty: 20 },
+  "Equity": { attack: "Valuation drill", timePenalty: 10, pointPenalty: 35 },
+  "Ethics": { attack: "Standards drill", timePenalty: 10, pointPenalty: 45 },
+  "Fixed Income": { attack: "Duration drill", timePenalty: 14, pointPenalty: 25 },
+  "FRA": { attack: "Accounting drill", timePenalty: 12, pointPenalty: 30 },
+  "Portfolio": { attack: "Tracking-error drill", timePenalty: 10, pointPenalty: 35 },
+  "Quant": { attack: "Regression drill", timePenalty: 12, pointPenalty: 30 },
 };
 
 const state = {
@@ -489,9 +489,9 @@ function setView(view) {
 }
 
 function bossPhase() {
-  if (state.gameValue <= 0) return "Defeated";
-  if (state.gameValue <= 30) return "Final phase";
-  if (state.gameValue <= 60) return "Enraged";
+  if (state.gameValue <= 0) return "Cleared";
+  if (state.gameValue <= 30) return "Finish line";
+  if (state.gameValue <= 60) return "Momentum phase";
   return "Guard up";
 }
 
@@ -499,7 +499,7 @@ function approvalTier() {
   if (state.gameValue >= 85) return "Diamond tier";
   if (state.gameValue >= 65) return "Court favorite";
   if (state.gameValue >= 40) return "Respectable";
-  return "On notice";
+  return "Building poise";
 }
 
 function streakTitle() {
@@ -596,7 +596,7 @@ function setStake(stake) {
   state.stake = stake;
   updatePowerButtons();
   if (stake === "double") {
-    flashRound(state.mode === "ton" ? "Confidence wager placed" : "Double-or-nothing armed", "hot");
+    flashRound(state.mode === "ton" ? "Confidence wager placed" : "Momentum wager armed", "hot");
   }
 }
 
@@ -607,7 +607,7 @@ function useHint() {
   state.usedHintThisQuestion = true;
   els.powerHint.textContent = feedbackHook(question);
   els.powerHint.classList.remove("hidden");
-  flashRound("Hint spent: fewer points on this answer", "neutral");
+  flashRound("Hint used: coaching unlocked", "neutral");
   updatePowerButtons();
 }
 
@@ -641,12 +641,12 @@ function pointPenalty() {
 
 function bossCounter(question) {
   if (state.mode !== "boss") return "";
-  const trait = BOSS_TRAITS[question.topic] || { attack: "Curriculum counter", timePenalty: 10, pointPenalty: 30 };
+  const trait = BOSS_TRAITS[question.topic] || { attack: "Curriculum drill", timePenalty: 10, pointPenalty: 30 };
   state.secondsLeft = Math.max(0, state.secondsLeft - trait.timePenalty);
   state.points = Math.max(0, state.points - trait.pointPenalty);
   els.roundTimer.textContent = formatTime(state.secondsLeft);
   els.roundTimer.classList.toggle("urgent", state.secondsLeft <= 60);
-  const message = `${trait.attack}: -${trait.timePenalty}s, -${trait.pointPenalty} pts`;
+  const message = `${trait.attack}: target logged, -${trait.timePenalty}s, -${trait.pointPenalty} pts`;
   flashRound(message, "danger");
   return message;
 }
@@ -662,12 +662,12 @@ function updateGameValue(correct) {
       ? Math.max(0, state.gameValue - totalDamage)
       : Math.min(100, state.gameValue + 8);
     effect = correct
-      ? `${critical ? "Critical hit" : "Hit"}: -${totalDamage} HP`
-      : "Boss heals: +8 HP";
+      ? `${critical ? "Critical mastery" : "Mastery hit"}: -${totalDamage} HP`
+      : "Boss route revealed: +8 HP";
     milestone = critical;
   } else if (state.mode === "lightning") {
     state.gameValue = state.streak;
-    effect = correct ? "Speed window held" : "Streak reset";
+    effect = correct ? "Speed window held" : "Streak reload";
   } else {
     const gain = Math.ceil(100 / state.deck.length);
     const wager = state.stake === "double" ? Math.ceil(gain * 0.55) : 0;
@@ -676,7 +676,7 @@ function updateGameValue(correct) {
       : Math.max(0, state.gameValue - (state.stake === "double" ? 22 : 8));
     effect = correct
       ? `${state.stake === "double" ? "Wager won" : approvalTier()} reached`
-      : state.stake === "double" ? "Scandal wager failed" : "Approval slipped";
+      : state.stake === "double" ? "Wager became a review target" : "Approval paused for review";
     milestone = correct && state.stake === "double";
   }
   updateMeter();
@@ -697,7 +697,7 @@ function renderQuestion() {
   state.usedHintThisQuestion = false;
   state.usedEliminateThisQuestion = false;
   state.questionStartedAt = Date.now();
-  els.topicBadge.textContent = state.runKind === "revenge" ? `${question.topic} · Revenge` : question.topic;
+  els.topicBadge.textContent = state.runKind === "revenge" ? `${question.topic} · Focus` : question.topic;
   els.characterName.textContent = topicCharacter(question.topic);
   els.quizCharacterName.textContent = topicCharacter(question.topic);
   els.sceneStatus.textContent = state.mode === "boss"
@@ -757,15 +757,15 @@ function feedbackHook(question) {
 function feedbackDetails(question, correct, modeEffect, speedBonus) {
   const rows = [];
   if (modeEffect) rows.push(["Mode", modeEffect]);
-  if (state.stake === "double") rows.push(["Wager", correct ? "Double points landed." : "Double penalty paid."]);
-  if (state.usedHintThisQuestion) rows.push(["Hint", "-35 pts for the assist."]);
-  if (state.usedEliminateThisQuestion) rows.push(["Eliminate", "-20 pts for removing a decoy."]);
+  if (state.stake === "double") rows.push(["Wager", correct ? "Double points landed." : "Double risk logged for review."]);
+  if (state.usedHintThisQuestion) rows.push(["Hint", "Coaching used on this rep."]);
+  if (state.usedEliminateThisQuestion) rows.push(["Eliminate", "One decoy removed for focus."]);
   if (state.mode === "lightning" && correct && speedBonus > 0) rows.push(["Speed", `+${speedBonus} pts`]);
   if (correct) {
     rows.push(["Hook", feedbackHook(question)]);
   } else {
-    rows.push(["Trap", feedbackTrap(question)]);
-    rows.push(["Fix", feedbackHook(question)]);
+    rows.push(["Target", feedbackTrap(question)]);
+    rows.push(["Next rep", feedbackHook(question)]);
   }
   return `<div class="feedback-details">${rows.map(([label, value]) => `<p><span>${html(label)}</span>${html(value)}</p>`).join("")}</div>`;
 }
@@ -813,11 +813,11 @@ function answerQuestion(choiceIndex, selectedChoice) {
   const modeEffect = updateGameValue(correct);
   const attackEffect = correct ? "" : bossCounter(question);
   if (lightningDecayed) {
-    modeEffect.effect = "Combo decayed: correct, but too slow for the chain";
-    flashRound("Combo decayed", "danger");
+    modeEffect.effect = "Combo saved: correct answer, speed target noted";
+    flashRound("Speed target noted", "danger");
   }
   const streakMilestone = correct && [3, 5, 8].includes(state.streak);
-  const status = modeEffect.effect || (correct ? "Clean answer" : "Review flagged");
+  const status = modeEffect.effect || (correct ? "Clean answer" : "Review target saved");
   updateStats(status);
   updateStreakBanner(streakMilestone || modeEffect.milestone);
   setSticker(correct ? "correct" : "wrong");
@@ -828,12 +828,13 @@ function answerQuestion(choiceIndex, selectedChoice) {
     delete els.quizCard.dataset.reaction;
   }, 450);
   if (streakMilestone) flashRound(`${state.streak}x streak surge`, "hot");
-  if (state.mode === "ton" && state.stake === "double" && !correct) flashRound("Scandal wager failed", "danger");
-  if (state.mode === "boss" && correct && modeEffect.milestone) flashRound("Critical hit", "hot");
+  if (state.mode === "ton" && state.stake === "double" && !correct) flashRound("Review target saved", "danger");
+  if (state.mode === "boss" && correct && modeEffect.milestone) flashRound("Critical mastery", "hot");
 
   els.feedback.className = `feedback ${correct ? "good" : "bad"}`;
   const effectText = [modeEffect.effect, attackEffect].filter(Boolean).join(" · ");
-  els.feedback.innerHTML = `<strong>${html(phrase(correct ? "correct" : "wrong"))}</strong> ${html(question.explain)}${feedbackDetails(question, correct, effectText, speedBonus)}`;
+  const explanationLead = correct ? "Key idea:" : "Not quite, but here's the key idea:";
+  els.feedback.innerHTML = `<strong>${html(phrase(correct ? "correct" : "wrong"))}</strong> <span class="feedback-lead">${html(explanationLead)}</span> ${html(question.explain)}${feedbackDetails(question, correct, effectText, speedBonus)}`;
   els.nextBtn.textContent = state.index === state.deck.length - 1
     ? "Finish Review"
     : state.mode === "lightning"
@@ -852,48 +853,48 @@ function rankFor(percent) {
   if (state.mode === "ton") {
     if (percent >= 90) return "Diamond of the Exam";
     if (percent >= 75) return "Most Eligible Analyst";
-    if (percent >= 55) return "Respectable, Under Review";
-    return "Summoned by Lady Danbury";
+    if (percent >= 55) return "Court Momentum";
+    return "Comeback Deck Ready";
   }
   if (state.mode === "boss") {
-    if (percent >= 90) return "Boss Deleted";
+    if (percent >= 90) return "Boss Cleared";
     if (percent >= 75) return "Arena Winner";
-    if (percent >= 55) return "Bruised Victory";
-    return "Boss Rematch";
+    if (percent >= 55) return "Momentum Win";
+    return "Upgrade Path Found";
   }
   if (percent >= 90) return "Voltage Maxed";
   if (percent >= 75) return "Clean Streak";
   if (percent >= 55) return "Sparks Flying";
-  return "Recharge Needed";
+  return "Next Rep Ready";
 }
 
 function tonHeadline(percent, timedOut) {
-  if (timedOut) return "Whistledown Special: The Clock Challenges Kruts.";
+  if (timedOut) return "Whistledown Special: The Clock Saved Fresh Targets.";
   if (percent >= 90) return "Society Papers: Kruts Dominates the Exam Floor.";
-  if (percent >= 75) return "Morning Sheet: Kruts Delivers, Minimal Scandal.";
-  if (percent >= 55) return "Gossip Column: Kruts Is Respectable, With Footnotes.";
-  return "Urgent Notice: Lady Danbury Requests Kruts' Rematch.";
+  if (percent >= 75) return "Morning Sheet: Kruts Delivers With Momentum.";
+  if (percent >= 55) return "Court Notes: Kruts Has Clear Targets and Traction.";
+  return "Lady Danbury's Note: The Next Rep Has a Map.";
 }
 
 function scoreNote(percent, timedOut) {
   if (timedOut) {
-    if (state.mode === "ton") return `${tonHeadline(percent, timedOut)} The unanswered items are preserved below.`;
-    if (state.mode === "boss") return "The timer won this round. Review the boss moves, then queue the rematch.";
-    return "Time expired. The missed flashes below are your next reps.";
+    if (state.mode === "ton") return `${tonHeadline(percent, timedOut)} Unanswered items are queued below for a focused follow-up.`;
+    if (state.mode === "boss") return "Timer closed the round. Review the boss routes, then queue a focused follow-up.";
+    return "Time closed the round. The saved targets below are your next reps.";
   }
   if (state.mode === "ton") {
-    if (percent >= 85) return `${tonHeadline(percent, timedOut)} Rotate topics before confidence becomes vanity.`;
-    if (percent >= 65) return `${tonHeadline(percent, timedOut)} Review the gossip before the next ball.`;
-    return `${tonHeadline(percent, timedOut)} Replay the weak concepts before the next appearance.`;
+    if (percent >= 85) return `${tonHeadline(percent, timedOut)} Rotate topics while confidence is high.`;
+    if (percent >= 65) return `${tonHeadline(percent, timedOut)} Review the court notes before the next ball.`;
+    return `${tonHeadline(percent, timedOut)} Run the focused targets and build the next streak.`;
   }
   if (state.mode === "boss") {
-    if (percent >= 85) return `Boss HP crushed. Max streak: ${state.maxStreak}.`;
-    if (percent >= 65) return `Good damage. Max streak: ${state.maxStreak}. Patch the weak attacks below.`;
-    return "The boss found your openings. Replay this deck after reviewing the counters.";
+    if (percent >= 85) return `Boss HP cleared. Max streak: ${state.maxStreak}.`;
+    if (percent >= 65) return `Good damage. Max streak: ${state.maxStreak}. Patch the target routes below.`;
+    return "The boss revealed high-value targets. Review them, then run the focused deck.";
   }
   if (percent >= 85) return `Fast and clean. Max streak: ${state.maxStreak}.`;
-  if (percent >= 65) return `Good rep. Max streak: ${state.maxStreak}; tighten the misses.`;
-  return "Useful speed stress. Slow down once, fix the concepts, then speed back up.";
+  if (percent >= 65) return `Good rep. Max streak: ${state.maxStreak}; tighten the saved targets.`;
+  return "Useful speed stress. Slow down once, lock the concepts, then speed back up.";
 }
 
 function renderWeakAreaSummary() {
@@ -905,7 +906,7 @@ function renderWeakAreaSummary() {
     .map(([name, count]) => `${html(name)} x${count}`)
     .join(" · ");
   if (!summary) return "";
-  return `<div class="review-item weak-summary"><strong>Pattern spotted:</strong> ${summary}</div>`;
+  return `<div class="review-item weak-summary"><strong>Pattern to level up:</strong> ${summary}</div>`;
 }
 
 function weakAreaCounts() {
@@ -921,19 +922,19 @@ function weakAreaCounts() {
 
 function resultReport(percent, timedOut) {
   const weakAreas = weakAreaCounts();
-  const weakArea = weakAreas[0] ? weakAreas[0][0] : "none";
+  const targetArea = weakAreas[0] ? weakAreas[0][0] : "none";
   const nextMove = state.missed.length
-    ? "Run the Revenge Round before starting a fresh deck."
+    ? "Run the Focus Round before starting a fresh deck."
     : state.mode === "boss"
       ? "Pick a new boss while the timing is warm."
       : "Raise the length or rotate topic for the next sprint.";
   const hook = state.missed[0] ? feedbackHook(state.missed[0]) : "Keep the streak alive with a harder topic.";
-  const timeoutText = timedOut ? "<p><strong>Clock:</strong> Time expired, so unanswered items are treated as misses.</p>" : "";
+  const timeoutText = timedOut ? "<p><strong>Clock:</strong> The round closed, so unanswered items are queued for review.</p>" : "";
   return `
     <div class="review-item battle-report">
       <p class="review-topic">Battle report</p>
       <h3>${html(rankFor(percent))}</h3>
-      <p><strong>Weak point:</strong> ${html(weakArea)}</p>
+      <p><strong>Level-up target:</strong> ${html(targetArea)}</p>
       <p><strong>Next move:</strong> ${html(nextMove)}</p>
       <p><strong>Memory hook:</strong> ${html(hook)}</p>
       ${timeoutText}
@@ -970,15 +971,15 @@ function renderResults(timedOut = false) {
     els.reviewList.innerHTML = resultReport(percent, timedOut) + `<div class="review-item clean">${html(currentMode().clean)}</div>`;
   } else {
     const label = state.mode === "ton"
-      ? "Whistledown writes"
+      ? "Court note"
       : state.mode === "boss"
-        ? "Countermove"
-        : "Fix";
+        ? "Upgrade route"
+        : "Next rep";
     els.reviewList.innerHTML = resultReport(percent, timedOut) + state.missed.map((item) => `
       <div class="review-item">
         <p class="review-topic">${html(item.topic)}${item.subtopic ? ` · ${html(item.subtopic)}` : ""} · ${html(label)}</p>
         <h3>${html(item.prompt)}</h3>
-        <p><strong>Your answer:</strong> ${item.selected === null ? "Not answered" : html(item.selectedChoice || item.choices[item.selected])}</p>
+        <p><strong>Your answer:</strong> ${item.selected === null ? "Queued for review" : html(item.selectedChoice || item.choices[item.selected])}</p>
         <p><strong>Correct:</strong> ${html(item.choices[item.answer])}</p>
         <p>${html(item.explain)}</p>
       </div>
@@ -986,7 +987,7 @@ function renderResults(timedOut = false) {
   }
 
   sparkBurst(percent >= 65, 26);
-  setSticker(percent >= 65 ? "correct" : "wrong");
+  setSticker(percent >= 65 ? "correct" : "start");
   setView("results");
 }
 
@@ -1129,7 +1130,7 @@ function toggleMusic() {
 function sparkBurst(positive, count = 16) {
   const colors = positive
     ? ["#f5b84b", "#41b883", "#f8f4eb", "#3e76d6"]
-    : ["#c7384a", "#f5b84b", "#7f1f2c", "#f8f4eb"];
+    : ["#d9822b", "#f5b84b", "#f8f4eb", "#6b5fb5"];
   for (let i = 0; i < count; i += 1) {
     const dot = document.createElement("span");
     dot.className = "spark";
