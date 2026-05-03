@@ -95,7 +95,7 @@ const TOPIC_CHARACTERS = {
   "Quant": "Eloise's Regression Lab",
 };
 
-const STORAGE_KEY = "cfaSprintProgress.v1";
+const STORAGE_KEY = "cfaSprintProgress.v2";
 
 const DEFAULT_PROGRESS = {
   bestPercent: 0,
