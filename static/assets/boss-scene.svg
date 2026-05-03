@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Boss rush finance arena">
+  <defs>
+    <linearGradient id="arena" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#111318"/>
+      <stop offset=".55" stop-color="#213b53"/>
+      <stop offset="1" stop-color="#5d2632"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="45%" r="42%">
+      <stop offset="0" stop-color="#41b883" stop-opacity=".86"/>
+      <stop offset=".44" stop-color="#3e76d6" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="520" rx="34" fill="url(#arena)"/>
+  <rect width="900" height="520" rx="34" fill="url(#core)"/>
+  <g opacity=".76">
+    <path d="M96 408 L216 118 L334 408Z" fill="#1a1d28"/>
+    <path d="M566 408 L684 118 L806 408Z" fill="#1a1d28"/>
+    <path d="M268 430 L450 74 L632 430Z" fill="#252a39"/>
+  </g>
+  <g transform="translate(348 118)">
+    <path d="M102 0 l42 74 84 16-58 63 10 85-78-35-78 35 10-85-58-63 84-16z" fill="#f5b84b"/>
+    <circle cx="102" cy="142" r="88" fill="#1d2330" stroke="#f5b84b" stroke-width="10"/>
+    <path d="M58 154 c25 38 63 38 88 0" stroke="#41b883" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <circle cx="72" cy="116" r="12" fill="#fff7df"/>
+    <circle cx="132" cy="116" r="12" fill="#fff7df"/>
+  </g>
+  <g stroke="#f5b84b" stroke-width="6" stroke-linecap="round" opacity=".75">
+    <path d="M112 116 h96"/>
+    <path d="M694 116 h96"/>
+    <path d="M116 164 h72"/>
+    <path d="M710 164 h72"/>
+  </g>
+</svg>

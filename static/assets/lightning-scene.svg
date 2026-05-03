@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Lightning review dashboard">
+  <defs>
+    <linearGradient id="dash" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#071b29"/>
+      <stop offset=".48" stop-color="#1e315e"/>
+      <stop offset="1" stop-color="#0d3b35"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" x2="1">
+      <stop offset="0" stop-color="#f5b84b"/>
+      <stop offset="1" stop-color="#41b883"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="520" rx="34" fill="url(#dash)"/>
+  <g opacity=".26" stroke="#f8f4eb" stroke-width="2">
+    <path d="M0 390 C180 270 300 455 452 326 C612 190 694 346 900 190"/>
+    <path d="M0 276 C210 166 322 340 480 226 C628 120 756 244 900 104"/>
+    <path d="M84 80 h732"/>
+    <path d="M84 440 h732"/>
+  </g>
+  <path d="M494 40 L268 292 h154 l-52 188 248-292 h-158z" fill="url(#bolt)"/>
+  <g fill="#fff7df">
+    <rect x="110" y="122" width="148" height="26" rx="13" opacity=".78"/>
+    <rect x="110" y="166" width="104" height="20" rx="10" opacity=".42"/>
+    <rect x="650" y="340" width="140" height="26" rx="13" opacity=".78"/>
+    <rect x="696" y="384" width="94" height="20" rx="10" opacity=".42"/>
+  </g>
+</svg>

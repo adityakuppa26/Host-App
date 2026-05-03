@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Regency ballroom scene">
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8dda6"/>
+      <stop offset=".52" stop-color="#b94f55"/>
+      <stop offset="1" stop-color="#24233d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="16%" r="58%">
+      <stop offset="0" stop-color="#fff3c8" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#f4b84b" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#1d2330" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="520" rx="34" fill="url(#wall)"/>
+  <rect width="900" height="520" rx="34" fill="url(#glow)"/>
+  <path d="M70 430 C210 360 300 392 450 330 C610 262 720 316 840 246 L840 520 L70 520Z" fill="#221d32" opacity=".72"/>
+  <path d="M134 88 h632 v282 h-632z" fill="#fff7df" opacity=".11"/>
+  <path d="M184 130 h532 v204 h-532z" fill="#1f2542" opacity=".34"/>
+  <g fill="none" stroke="#f8d48e" stroke-width="7" opacity=".74">
+    <path d="M170 374 C260 312 332 312 450 374 C568 312 640 312 730 374"/>
+    <path d="M450 64 v272"/>
+    <path d="M306 78 c28 72 28 152 0 240"/>
+    <path d="M594 78 c-28 72-28 152 0 240"/>
+  </g>
+  <g transform="translate(390 122)">
+    <path d="M60 0 C28 42 38 92 60 126 C82 92 92 42 60 0Z" fill="#f5b84b"/>
+    <circle cx="60" cy="146" r="18" fill="#f5b84b"/>
+    <path d="M60 164 v104" stroke="#f5b84b" stroke-width="8" stroke-linecap="round"/>
+    <path d="M20 228 h80 l22 92 h-124z" fill="#f4efe2" opacity=".9"/>
+  </g>
+  <g fill="#fff7df" opacity=".86">
+    <circle cx="214" cy="402" r="8"/>
+    <circle cx="250" cy="386" r="5"/>
+    <circle cx="692" cy="352" r="7"/>
+    <circle cx="728" cy="330" r="5"/>
+    <circle cx="778" cy="302" r="6"/>
+  </g>
+</svg>

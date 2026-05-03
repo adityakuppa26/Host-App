@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CFA Level 2 Sprint</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-mode="ton">
+    <div id="fxLayer" class="fx-layer" aria-hidden="true"></div>
+    <div class="ambient" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <p id="modeEyebrow" class="eyebrow">CFA Level 2 · May 20, 2026</p>
+          <h1 id="heroTitle">The Ton Review</h1>
+          <p id="heroSubhead" class="subhead">Win Queen Charlotte's approval by surviving CFA Level 2 traps with poise.</p>
+        </div>
+        <div class="countdown" aria-label="Exam countdown">
+          <span id="daysLeft" class="countdown-number">--</span>
+          <span id="daysLabel" class="countdown-label">days left</span>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="Quiz setup">
+        <div class="setup-copy">
+          <h2 id="setupTitle">Choose a Sprint</h2>
+          <p id="setupCopy">Pick a deck, answer under light time pressure, then review only what matters.</p>
+          <p class="dedication">Built for Kruts' final CFA push.</p>
+        </div>
+        <div id="modePreview" class="mode-preview" aria-live="polite">
+          <span id="modePreviewKicker">Current Mode</span>
+          <strong id="modePreviewTitle">The Ton</strong>
+          <p id="modePreviewCopy">Approval meter, gossip-sheet review, and society-level pressure.</p>
+        </div>
+        <div class="progress-panel" aria-label="Stored progress">
+          <div><span>Best</span><strong id="bestScoreStat">No runs yet</strong></div>
+          <div><span>Streak</span><strong id="bestStreakStat">0</strong></div>
+          <div><span>Daily</span><strong id="dailyStat">0 days</strong></div>
+          <div><span>Bosses</span><strong id="clearedBossesStat">0 cleared</strong></div>
+        </div>
+        <div class="controls">
+          <label>
+            Mode
+            <select id="modeSelect">
+              <option value="ton">The Ton</option>
+              <option value="boss">Boss Rush</option>
+              <option value="lightning">Lightning</option>
+            </select>
+          </label>
+          <label>
+            Topic
+            <select id="topicSelect"></select>
+          </label>
+          <label>
+            Length
+            <select id="lengthSelect">
+              <option value="5">5 questions</option>
+              <option value="8" selected>8 questions</option>
+              <option value="10">10 questions</option>
+            </select>
+          </label>
+          <button id="musicBtn" type="button" class="secondary" aria-pressed="false">Music Off</button>
+          <button id="startBtn" type="button">Start Sprint</button>
+        </div>
+      </section>
+
+      <section class="arena" aria-live="polite">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-copy">
+            <h2 id="emptyTitle">The social season begins.</h2>
+            <p id="emptyCopy">A polished answer earns approval. A shaky one becomes tomorrow's scandal sheet.</p>
+          </div>
+          <div class="scene-wrap">
+            <img id="sceneImage" src="assets/regency-scene.svg" alt="" aria-hidden="true">
+            <img id="emptySticker" class="sticker sticker-empty" src="assets/regency-sticker.svg" alt="" aria-hidden="true">
+            <div id="characterName" class="character-name">Lady Whistledown</div>
+          </div>
+        </div>
+
+        <article id="quizCard" class="quiz-card hidden">
+          <div class="quiz-topline">
+            <span id="topicBadge" class="badge">Topic</span>
+            <div class="quiz-meta">
+              <span id="roundTimer">08:00</span>
+              <span id="questionCounter">1 / 8</span>
+            </div>
+          </div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+          <div class="quiz-layout">
+            <aside class="quiz-scene" aria-label="Quiz status">
+              <img id="quizSceneImage" src="assets/regency-scene.svg" alt="" aria-hidden="true">
+              <img id="moodSticker" class="sticker mood-sticker" src="assets/regency-sticker.svg" alt="" aria-hidden="true">
+              <div class="scene-overlay">
+                <span id="quizCharacterName">Lady Whistledown</span>
+                <strong id="sceneStatus">Enter the round</strong>
+              </div>
+              <div class="score-chips">
+                <div><span>Score</span><strong id="scoreChip">0</strong></div>
+                <div><span>Streak</span><strong id="streakChip">0</strong></div>
+                <div><span>Points</span><strong id="pointsChip">0</strong></div>
+              </div>
+            </aside>
+            <div class="question-panel">
+              <div id="gameMeter" class="game-meter">
+                <span id="meterLabel">Queen's Approval</span>
+                <strong id="meterValue">0</strong>
+              </div>
+              <div id="streakBanner" class="streak-banner hidden" aria-live="polite"></div>
+              <div id="roundFlash" class="round-flash hidden" aria-live="polite"></div>
+              <div id="caseBlock" class="case-block hidden"></div>
+              <p id="questionText" class="question"></p>
+              <div class="power-bar" aria-label="Answer tools">
+                <button id="steadyBtn" type="button" class="power selected" data-stake="steady">Steady</button>
+                <button id="doubleBtn" type="button" class="power" data-stake="double">Double</button>
+                <button id="hintBtn" type="button" class="power secondary">Hint 1</button>
+                <button id="eliminateBtn" type="button" class="power secondary">Eliminate 1</button>
+              </div>
+              <div id="powerHint" class="power-hint hidden"></div>
+              <div id="answers" class="answers"></div>
+              <div id="feedback" class="feedback hidden"></div>
+              <div class="quiz-actions">
+                <button id="nextBtn" type="button" class="secondary hidden">Next</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article id="resultsCard" class="results-card hidden">
+          <div class="score-row">
+            <div>
+              <p id="resultsEyebrow" class="eyebrow">Sprint Complete</p>
+              <h2 id="scoreText">0 / 0</h2>
+            </div>
+            <div id="rankBadge" class="rank-badge">Review</div>
+          </div>
+          <p id="scoreNote" class="score-note"></p>
+          <div id="reviewList" class="review-list"></div>
+          <div class="quiz-actions">
+            <button id="revengeBtn" type="button" class="hidden">Revenge Round</button>
+            <button id="retryBtn" type="button">Replay Deck</button>
+            <button id="newDeckBtn" type="button" class="secondary">New Deck</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="quiz-data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
