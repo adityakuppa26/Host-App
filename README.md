@@ -1,6 +1,6 @@
 # CFA Level 2 Sprint App
 
-A tiny, no-login, no-database revision app for short CFA Level 2 quiz sprints.
+A tiny, no-login revision app for short CFA Level 2 quiz sprints.
 
 Modes included:
 - The Ton: Bridgerton-flavored approval meter and gossip-sheet review.
@@ -34,5 +34,8 @@ When deploying this repository as a Render Web Service:
 - Environment: Python
 - Build command: leave blank
 - Start command: `python app.py`
+- Persistent disk mount path: `/var/data`
+- Environment variable: `DATA_DIR=/var/data`
 
 The app reads Render's `PORT` environment variable and binds to `0.0.0.0` automatically.
+Progress is stored in SQLite at `$DATA_DIR/progress.sqlite3`, so only files under the disk mount path need to persist.

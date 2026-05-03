@@ -1,5 +1,6 @@
 const EXAM_DATE = new Date("2026-05-20T00:00:00");
 const ALL_TOPICS = "Mixed Review";
+const PROGRESS_ENDPOINT = "/api/progress";
 
 const MODES = {
   ton: {
@@ -173,6 +174,11 @@ const audio = {
   beat: 0,
 };
 
+const progressSync = {
+  inFlight: false,
+  pendingBody: "",
+};
+
 const els = {
   fxLayer: document.querySelector("#fxLayer"),
   modeEyebrow: document.querySelector("#modeEyebrow"),
@@ -262,32 +268,116 @@ function yesterdayKey() {
   return `${yesterday.getFullYear()}-${String(yesterday.getMonth() + 1).padStart(2, "0")}-${String(yesterday.getDate()).padStart(2, "0")}`;
 }
 
-function loadProgression() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    state.progression = {
-      ...DEFAULT_PROGRESS,
-      ...saved,
-      clearedBosses: Array.isArray(saved.clearedBosses) ? saved.clearedBosses : [],
-      seenQuestions: Array.isArray(saved.seenQuestions) ? saved.seenQuestions : [],
-    };
-  } catch {
-    state.progression = { ...DEFAULT_PROGRESS };
+function normalizeProgression(saved) {
+  const source = saved && typeof saved === "object" ? saved : {};
+  return {
+    ...DEFAULT_PROGRESS,
+    ...source,
+    clearedBosses: Array.isArray(source.clearedBosses) ? source.clearedBosses : [],
+    seenQuestions: Array.isArray(source.seenQuestions) ? source.seenQuestions : [],
+  };
+}
+
+function applyProgressionDateRules(progress) {
+  if (![todayKey(), yesterdayKey()].includes(progress.dailyDate)) {
+    progress.dailyStreak = 0;
+    progress.dailyRuns = 0;
+  } else if (progress.dailyDate !== todayKey()) {
+    progress.dailyRuns = 0;
   }
-  if (![todayKey(), yesterdayKey()].includes(state.progression.dailyDate)) {
-    state.progression.dailyStreak = 0;
-    state.progression.dailyRuns = 0;
-  } else if (state.progression.dailyDate !== todayKey()) {
-    state.progression.dailyRuns = 0;
+  return progress;
+}
+
+function mergeProgression(localProgress, remoteProgress) {
+  const local = normalizeProgression(localProgress);
+  const remote = normalizeProgression(remoteProgress);
+  const merged = { ...remote };
+
+  if (local.bestPercent > remote.bestPercent) {
+    merged.bestPercent = local.bestPercent;
+    merged.bestPoints = local.bestPoints;
+  } else if (local.bestPercent === remote.bestPercent) {
+    merged.bestPoints = Math.max(local.bestPoints, remote.bestPoints);
+  }
+  merged.bestStreak = Math.max(local.bestStreak, remote.bestStreak);
+  merged.clearedBosses = [...new Set([...remote.clearedBosses, ...local.clearedBosses])].sort();
+  merged.seenQuestions = [...new Set([...remote.seenQuestions, ...local.seenQuestions])];
+
+  if (local.dailyDate > remote.dailyDate) {
+    merged.dailyDate = local.dailyDate;
+    merged.dailyStreak = local.dailyStreak;
+    merged.dailyRuns = local.dailyRuns;
+  } else if (local.dailyDate === remote.dailyDate) {
+    merged.dailyStreak = Math.max(local.dailyStreak, remote.dailyStreak);
+    merged.dailyRuns = Math.max(local.dailyRuns, remote.dailyRuns);
+  }
+
+  return applyProgressionDateRules(merged);
+}
+
+function loadLocalProgression() {
+  try {
+    return normalizeProgression(JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"));
+  } catch {
+    return { ...DEFAULT_PROGRESS };
   }
 }
 
-function saveProgression() {
+async function loadRemoteProgression() {
+  try {
+    const response = await fetch(PROGRESS_ENDPOINT, { cache: "no-store" });
+    if (!response.ok) return null;
+    return normalizeProgression(await response.json());
+  } catch {
+    return null;
+  }
+}
+
+async function loadProgression() {
+  const localProgress = loadLocalProgression();
+  const remoteProgress = await loadRemoteProgression();
+  state.progression = remoteProgress
+    ? mergeProgression(localProgress, remoteProgress)
+    : applyProgressionDateRules(localProgress);
+  saveProgression();
+}
+
+function cacheProgression() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progression));
   } catch {
     // Progression is nice to have; the quiz should still work if storage is blocked.
   }
+}
+
+function saveProgression() {
+  cacheProgression();
+  queueRemoteProgressSave();
+}
+
+function queueRemoteProgressSave() {
+  progressSync.pendingBody = JSON.stringify(state.progression);
+  if (!progressSync.inFlight) flushRemoteProgressSave();
+}
+
+async function flushRemoteProgressSave() {
+  progressSync.inFlight = true;
+  while (progressSync.pendingBody) {
+    const body = progressSync.pendingBody;
+    progressSync.pendingBody = "";
+    try {
+      const response = await fetch(PROGRESS_ENDPOINT, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body,
+      });
+      if (!response.ok) throw new Error("Progress save failed");
+    } catch {
+      progressSync.pendingBody = progressSync.pendingBody || body;
+      break;
+    }
+  }
+  progressSync.inFlight = false;
 }
 
 function updateProgressPanel() {
@@ -1144,8 +1234,8 @@ function sparkBurst(positive, count = 16) {
   }
 }
 
-function init() {
-  loadProgression();
+async function init() {
+  await loadProgression();
   updateProgressPanel();
   updateCountdown();
   populateTopics();
